@@ -9,6 +9,7 @@ using Dashboard.Infrastructure.Aggregates;
 using Dashboard.Infrastructure.Data;
 using Dashboard.Infrastructure.Dimensions;
 using Dashboard.Infrastructure.Persistence.Repositories;
+using Dashboard.Infrastructure.Data.Seed;
 using Dashboard.Infrastructure.Snapshots;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -102,6 +103,32 @@ builder.Services.AddScoped<IAggregationService, LabourAggregationService>();
 // ============================================================
 
 var app = builder.Build();
+
+// ============================================================
+// DATABASE MIGRATION + DEMO SEED (chi Development/Local)
+// ============================================================
+//
+// Chi tu-migrate/seed o Development/Local de tranh dong DDL/du lieu
+// demo len moi truong SIT/UAT/Production ngoai y muon (xem
+// docs/decisions/decision-log.md D5). "Database:SeedDemoData" mac
+// dinh false (khong khai bao trong appsettings.json) - chi bat trong
+// appsettings.Local.json cho dev ca nhan.
+
+if (app.Environment.IsDevelopment()
+    || app.Environment.EnvironmentName == "Local")
+{
+    using var migrationScope = app.Services.CreateScope();
+
+    var dbContext = migrationScope.ServiceProvider
+        .GetRequiredService<DashboardDbContext>();
+
+    await dbContext.Database.MigrateAsync();
+
+    if (app.Configuration.GetValue<bool>("Database:SeedDemoData"))
+    {
+        await DashboardDemoDataSeeder.SeedAsync(dbContext);
+    }
+}
 
 // ============================================================
 // HTTP PIPELINE

@@ -4,7 +4,8 @@
   },
 
   "Database": {
-    "Schema": "dashboard_sch"
+    "Schema": "dashboard_sch",
+    "SeedDemoData": false
   },
 
   "Serilog": {
