@@ -8,6 +8,10 @@
     "SeedDemoData": false
   },
 
+  "Redis": {
+    "ConnectionString": "<redis-host>:<redis-port>"
+  },
+
   "Serilog": {
     "Using": [
       "Serilog.Sinks.Console",
