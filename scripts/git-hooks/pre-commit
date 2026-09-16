@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Basic secret-pattern guard for staged changes.
+# Temporary stand-in for gitleaks/git-secrets (see docs/standards/secret-handling.md).
+# Install: bash scripts/setup-hooks.sh
+
+set -euo pipefail
+
+staged_diff="$(git diff --cached -U0 -- . ':(exclude)*.example' ':(exclude)*.dll')"
+
+if [ -z "$staged_diff" ]; then
+  exit 0
+fi
+
+# Only look at added lines.
+added_lines="$(echo "$staged_diff" | grep -E '^\+' | grep -vE '^\+\+\+' || true)"
+
+pattern='(Password|Pwd|Secret|ApiKey|Api_Key|ConnectionString)[\"'"'"']?\s*[:=]\s*[\"'"'"']?[A-Za-z0-9@#\$%^&*!._-]{4,}'
+
+hit="$(echo "$added_lines" | grep -inE "$pattern" || true)"
+
+if [ -n "$hit" ]; then
+  echo "pre-commit: phat hien pattern giong secret trong staged changes:" >&2
+  echo "$hit" >&2
+  echo "" >&2
+  echo "Neu day la placeholder (vd <db-password>), bo qua bang: git commit --no-verify" >&2
+  echo "Neu day la gia tri that: bo ra khoi commit, dua vao file .Development.json (da gitignore) hoac .example voi placeholder." >&2
+  exit 1
+fi
+
+exit 0
