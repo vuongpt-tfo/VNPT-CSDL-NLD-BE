@@ -1,0 +1,121 @@
+src/ 
+├── Dashboard.API/ 
+│   ├── Program.cs 
+│   ├── appsettings.Development.json 
+│   ├── appsettings.json 
+│   ├── Controllers/ 
+│   │   ├── LabourDashboardController.cs 
+│   ├── DTOs/ 
+│   │   ├── LabourEmployment/ 
+│   │   │   ├── LabourEmploymentSummaryResponse.cs 
+│   │   ├── LabourIdentity/ 
+│   │   │   ├── LabourIdentitySummaryResponse.cs 
+│   │   ├── LabourInsurance/ 
+│   │   │   ├── LabourInsuranceSummaryResponse.cs 
+│   ├── Extensions/ 
+│   │   ├── ServiceCollectionExtensions.cs 
+│   ├── Mappers/ 
+│   │   ├── DashboardMapper.cs 
+│   ├── Middleware/ 
+│   ├── Properties/ 
+│   │   ├── launchSettings.json 
+├── Dashboard.Application/ 
+│   ├── AssemblyMarker.cs 
+│   ├── Abstractions/ 
+│   │   ├── Aggregation/ 
+│   │   │   ├── IAggregationService.cs 
+│   │   ├── Cache/ 
+│   │   │   ├── IDashboardCache.cs 
+│   │   ├── Dimension/ 
+│   │   │   ├── IDimensionReader.cs 
+│   │   ├── Persistence/ 
+│   │   │   ├── ILabourDashboardReadRepository.cs 
+│   │   ├── Snapshots/ 
+│   │   │   ├── ISnapshotReader.cs 
+│   ├── Common/ 
+│   │   ├── Dtos/ 
+│   │   │   ├── DashboardSummaryDto.cs 
+│   │   │   ├── LabourAgeDto.cs 
+│   │   ├── Models/ 
+│   │   │   ├── DashboardQueryContext.cs 
+│   ├── Features/ 
+│   │   ├── LabourDashboard/ 
+│   │   │   ├── Dtos/ 
+│   │   │   ├── Queries/ 
+│   │   │   │   ├── GetLabourByAge/ 
+│   │   │   │   │   ├── GetLabourByAgeQuery.cs 
+│   │   │   │   │   ├── GetLabourByAgeQueryHandler.cs 
+│   │   ├── LabourIdentity/ 
+│   │   │   ├── Dtos/ 
+│   │   │   │   ├── LabourIdentitySummaryDto.cs 
+│   │   │   ├── Queries/ 
+│   │   │   │   ├── GetLabourIdentitySummaryQuery.cs 
+│   │   ├── LabourInsurance/ 
+│   │   │   ├── Dtos/ 
+│   │   │   │   ├── LabourInsuranceSummaryDto.cs 
+│   │   │   ├── Queries/ 
+│   │   │   │   ├── GetLabourInsuranceSummaryQuery.cs 
+├── Dashboard.Domain/ 
+│   ├── Entities/ 
+│   │   ├── DashboardDataset.cs 
+│   │   ├── DashboardDefinition.cs 
+│   │   ├── Dim/ 
+│   │   │   ├── DimAdministrativeUnit.cs 
+│   │   │   ├── DimAgeRange.cs 
+│   │   │   ├── DimCatalogItem.cs 
+│   │   │   ├── DimIndustry.cs 
+│   │   │   ├── DimOccupation.cs 
+│   │   ├── Snapshots/ 
+│   │   │   ├── LabourEmploymentSnapshot.cs 
+│   │   │   ├── LabourIdentitySnapshot.cs 
+│   │   ├── Summary/ 
+│   │   │   ├── LabourIdentitySummary.cs 
+│   ├── Enums/ 
+│   │   ├── AggregationType.cs 
+│   │   ├── DatasetType.cs 
+│   │   ├── SnapshotRunStatus.cs 
+│   ├── Repositories/ 
+│   │   ├── IDashboardRepository.cs 
+│   │   ├── ISnapshotRepository.cs 
+│   │   ├── ISummaryRepository.cs 
+│   ├── Rules/ 
+│   ├── ValueObjects/ 
+│   │   ├── DimensionKey.cs 
+│   │   ├── MetricValue.cs 
+├── Dashboard.Infrastructure/ 
+│   ├── Aggregates/ 
+│   │   ├── SummaryRepository.cs 
+│   ├── Data/ 
+│   │   ├── DashboardDbContext.cs 
+│   │   ├── Configurations/ 
+│   │   │   ├── Dim/ 
+│   │   │   │   ├── DimAdministrativeUnitConfiguration.cs 
+│   │   │   │   ├── DimAgeRangeConfiguration.cs 
+│   │   │   │   ├── DimCatalogItemConfiguration.cs 
+│   │   │   │   ├── DimIndustryConfiguration.cs 
+│   │   │   │   ├── DimOccupationConfiguration.cs 
+│   │   │   ├── Snapshots/ 
+│   │   │   │   ├── LabourEmploymentSnapshotConfiguration.cs 
+│   │   │   │   ├── LabourIdentitySnapshotConfiguration.cs 
+│   │   │   ├── Summary/ 
+│   │   │   │   ├── LabourIdentitySummaryConfiguration.cs 
+│   ├── Dimensions/ 
+│   │   ├── DimensionRepository.cs 
+│   ├── Extensions/ 
+│   │   ├── ServiceCollectionExtensions.cs 
+│   ├── Persistence/ 
+│   │   ├── Repositories/ 
+│   │   │   ├── LabourDashboardReadRepository.cs 
+│   ├── Queries/ 
+│   │   ├── LabourEmployment/ 
+│   │   │   ├── LabourEmploymentSummaryQuery.cs 
+│   │   ├── LabourIdentity/ 
+│   │   │   ├── LabourIdentitySummaryQuery.cs 
+│   │   ├── LabourInsurance/ 
+│   │   │   ├── LabourInsuranceSummaryQuery.cs 
+│   ├── Redis/ 
+│   │   ├── DashboardRedisCache.cs 
+│   │   ├── DashboardRedisKeys.cs 
+│   ├── Snapshots/ 
+│   │   ├── SnapshotRepository.cs 
+├── Library/ 

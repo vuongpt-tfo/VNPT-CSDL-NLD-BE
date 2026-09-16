@@ -1,0 +1,92 @@
+# ================================
+# .NET / C#
+# ================================
+
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / ReSharper
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# Test results
+TestResults/
+*.trx
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml
+
+# ================================
+# Logs
+# ================================
+
+*.log
+logs/
+Log/
+Logs/
+
+# ASP.NET / Application logs
+App_Data/logs/
+wwwroot/logs/
+
+# Serilog
+serilog/
+*.log.*
+
+# ================================
+# Temporary files
+# ================================
+
+*.tmp
+*.temp
+*.bak
+*.swp
+*.cache
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ================================
+# Generated files
+# ================================
+
+*.generated.cs
+*.g.cs
+*.g.i.cs
+
+# ================================
+# Local configuration
+# ================================
+
+appsettings.Local.json
+appsettings.*.Local.json
+
+# ================================
+# IMPORTANT
+# ================================
+# Do NOT ignore DLL files.
+# DLL files under Library/ remain trackable.
+#
+# Example:
+# Library/
+#   ├── MyLibrary.dll       <- NOT ignored
+#   ├── MyLibrary.pdb       <- can be ignored if desired
+#   └── logs/
+#       └── application.log <- ignored by *.log
