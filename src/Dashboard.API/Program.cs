@@ -1,4 +1,5 @@
 using BuildingBlocks.CrossCutting.Logging;
+using Dashboard.API.Middleware;
 using Dashboard.Application;
 using Dashboard.Application.Abstractions.Aggregation;
 using Dashboard.Application.Abstractions.Cache;
@@ -10,6 +11,7 @@ using Dashboard.Infrastructure.Aggregates;
 using Dashboard.Infrastructure.Data;
 using Dashboard.Infrastructure.Data.Seed;
 using Dashboard.Infrastructure.Dimensions;
+using Dashboard.Infrastructure.HealthChecks;
 using Dashboard.Infrastructure.Persistence.Repositories;
 using Dashboard.Infrastructure.Redis;
 using Dashboard.Infrastructure.Snapshots;
@@ -128,6 +130,13 @@ if (!string.IsNullOrWhiteSpace(redisConnectionString))
 }
 
 // ============================================================
+// HEALTH CHECKS (NFR-HT-06)
+// ============================================================
+
+builder.Services.AddHealthChecks()
+    .AddCheck<DashboardDbHealthCheck>("postgres");
+
+// ============================================================
 // BUILD
 // ============================================================
 
@@ -169,6 +178,14 @@ if (app.Environment.IsDevelopment())
 }
 
 // ============================================================
+// CORRELATION ID (NFR-HT-06) - dat truoc cac middleware khac de moi
+// log/response phia sau (bao gom CORS/Authorization) deu mang cung
+// CorrelationId cua request.
+// ============================================================
+
+app.UseCorrelationId();
+
+// ============================================================
 // CORS
 // ============================================================
 
@@ -177,6 +194,12 @@ app.UseCors("DashboardFrontend");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+// ============================================================
+// HEALTH CHECK ENDPOINT
+// ============================================================
+
+app.MapHealthChecks("/health");
 
 try
 {
