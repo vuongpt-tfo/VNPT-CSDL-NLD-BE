@@ -90,3 +90,11 @@ appsettings.*.Local.json
 #   ├── MyLibrary.pdb       <- can be ignored if desired
 #   └── logs/
 #       └── application.log <- ignored by *.log
+
+# ================================
+# Secrets (per docs/standards/git-flow.md muc 9)
+# ================================
+# File appsettings.Development.json chua gia tri THAT khi dev local - KHONG commit.
+# Commit ban .example (chi chua placeholder) thay the; xem docs/standards/secret-handling.md.
+appsettings.Development.json
+appsettings.*.Development.json
